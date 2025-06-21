@@ -312,3 +312,34 @@
     transform: translateY(0);
   }
 }
+
+.species-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.species-item {
+  background-color: #25282a;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.species-item:hover {
+  color: #181A1B;
+  background-color: var(--primary-accent);
+  border-color: var(--primary-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(110, 235, 131, 0.2);
+}
+
+/* No se necesitan media queries específicas para el layout de flex-wrap, se ajusta solo */
