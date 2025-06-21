@@ -1,23 +1,26 @@
 /* --- Estilos Generales de la Página --- */
 .page-container {
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 40px;
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 40px 40px 40px 40px;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
 .page-header {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .page-title {
   font-family: var(--font-headings);
-  font-size: 3.5rem;
+  font-size: 2.8rem;
+  color: var(--text-primary);
   margin-bottom: 10px;
 }
 
 .page-subtitle {
-  font-size: 1.2rem;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
@@ -273,5 +276,39 @@
   }
   .upload-column {
     position: static;
+  }
+}
+
+/* Estilos para el contenedor de Gradio */
+.gradio-container {
+  background-color: var(--surface);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  overflow: hidden; /* Asegura que el iframe respete el borde redondeado */
+  transition: all 0.3s ease;
+}
+
+.gradio-container:hover {
+  border-color: var(--primary-accent);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 40px rgba(110, 235, 131, 0.1);
+}
+
+.gradio-container iframe {
+  border: none;
+  border-radius: 8px; /* Redondea las esquinas del propio iframe */
+  display: block;
+  width: 100%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
