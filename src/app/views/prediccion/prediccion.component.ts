@@ -1,130 +1,99 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-prediccion',
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './prediccion.component.html',
   styleUrls: ['./prediccion.component.css']
 })
-export class PrediccionComponent implements OnInit {
+export class PrediccionComponent {
   selectedFile: File | null = null;
-  imagePreviewUrl: string | null = null;
+  imagePreviewUrl: string | ArrayBuffer | null = null;
   isLoading: boolean = false;
   result: any = null;
   errorMessage: string | null = null;
-  backendStatus: string = 'Verificando...';
-  tiempoProcesamiento: number | null = null;
+  isDragOver: boolean = false;
 
-  constructor(private apiService: ApiService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.checkBackendConnection();
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    this.isDragOver = true;
   }
 
-  checkBackendConnection(): void {
-    this.apiService.checkBackendHealth().subscribe({
-      next: (response) => {
-        this.backendStatus = `Conectado (${response.status})`;
-      },
-      error: (error) => {
-        this.backendStatus = `Error de conexión: ${error}`;
-      }
-    });
-  }
-
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-    this.resetAnalysis();
-    
-    if (file && this.isImage(file.type)) {
-      this.selectedFile = file;
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.imagePreviewUrl = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    } else if (file) {
-      this.errorMessage = 'Solo se aceptan imágenes (JPEG, PNG, JPG)';
-      this.selectedFile = null;
-    }
+  onDragLeave(event: DragEvent): void {
+    event.preventDefault();
+    this.isDragOver = false;
   }
 
   onDrop(event: DragEvent): void {
     event.preventDefault();
-    this.resetAnalysis();
-    if (event.dataTransfer && event.dataTransfer.files.length > 0) {
-      const file = event.dataTransfer.files[0];
-      if (file && this.isImage(file.type)) {
-        this.selectedFile = file;
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.imagePreviewUrl = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      } else {
-        this.errorMessage = 'Solo se aceptan imágenes (JPEG, PNG, JPG)';
-        this.selectedFile = null;
-      }
+    this.isDragOver = false;
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.processFile(files[0]);
     }
   }
 
-  isImage(fileType: string): boolean {
-    return fileType.match(/image\/(png|jpeg|jpg)/) !== null;
+  onFileSelected(event: Event): void {
+    const element = event.currentTarget as HTMLInputElement;
+    let files: FileList | null = element.files;
+    if (files && files.length > 0) {
+      this.processFile(files[0]);
+    }
+  }
+
+  processFile(file: File): void {
+    if (!file.type.match(/image\/(png|jpeg|jpg)/)) {
+      this.errorMessage = 'Formato de archivo no válido. Por favor, suba una imagen (JPG, PNG).';
+      return;
+    }
+    
+    this.resetState();
+    this.selectedFile = file;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreviewUrl = reader.result;
+    };
+    reader.readAsDataURL(file);
   }
 
   analizar(): void {
     if (!this.selectedFile) return;
 
     this.isLoading = true;
-    this.errorMessage = null;
-    this.tiempoProcesamiento = null;
-    
-    this.apiService.analyzeImage(this.selectedFile).subscribe({
-      next: (response) => {
-        this.result = response;
-        this.tiempoProcesamiento = response.tiempo_de_espera || null;
-        this.isLoading = false;
-      },
-      error: (error) => {
-        this.errorMessage = this.handleApiError(error);
-        this.isLoading = false;
-      }
-    });
-  }
-
-  private handleApiError(error: any): string {
-    if (error.error?.error?.includes('No se pudo descargar el modelo')) {
-      return 'Error al cargar los modelos de análisis. Por favor intente más tarde.';
-    }
-    return error.error?.detail || 'Error al procesar la imagen';
-  }
-
-  resetAnalysis(): void {
     this.result = null;
     this.errorMessage = null;
-    this.tiempoProcesamiento = null;
+
+    // Simular llamada a la API con un timeout
+    setTimeout(() => {
+      // Mock de una respuesta exitosa
+      this.result = {
+        predictions: [
+          { species: 'Ciervo Rojo (Cervus elaphus)', confidence: 92.3 },
+          { species: 'Corzo (Capreolus capreolus)', confidence: 5.1 },
+          { species: 'Gamo (Dama dama)', confidence: 1.8 },
+        ]
+      };
+      this.isLoading = false;
+
+      // Para probar el estado de error, descomente la siguiente sección:
+      /*
+      this.errorMessage = "El modelo no pudo clasificar esta imagen. Intente con una imagen más clara.";
+      this.result = null;
+      this.isLoading = false;
+      */
+    }, 2500);
   }
 
-  formatDiagnosis(diagnosis: string): string {
-    const diagnoses: {[key: string]: string} = {
-      'Tuberculosis': 'Tuberculosis Detectada',
-      'Normal': 'Normal (No se detectó tuberculosis)',
-      'BajaCalidad': 'Baja Calidad - Precaución en el diagnóstico',
-      'NoRadiografia': 'No es una radiografía'
-    };
-    return diagnoses[diagnosis] || diagnosis;
-  }
-
-  getDiagnosisColor(diagnostico: string): string {
-    switch(diagnostico) {
-      case 'Tuberculosis': return 'diagnosis-danger';
-      case 'Normal': return 'diagnosis-success';
-      case 'BajaCalidad': return 'diagnosis-warning';
-      case 'NoRadiografia': return 'diagnosis-info';
-      default: return '';
-    }
+  resetState(): void {
+    this.result = null;
+    this.errorMessage = null;
+    this.selectedFile = null;
+    this.imagePreviewUrl = null;
+    this.isLoading = false;
   }
 }

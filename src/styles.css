@@ -1,27 +1,43 @@
 /* styles.css */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@300;400;500;700&display=swap');
 
 :root {
-  --blue-corp: #2C5282;
-  --blue-ui: #3182CE;
-  --bg-base: #EDF2F7;
-  --surface: #FFFFFF;
-  --text-primary: #1A202C;
-  --text-secondary: #4A5568;
-  --accent-success: #38A169;
+  /* Paleta de colores Dark Theme Inspirada en la Naturaleza */
+  --bg-base: #181A1B;
+  --surface: #2A2C2D;
+  --primary-accent: #6EEB83;
+  --text-primary: #E8E6E3;
+  --text-secondary: #B0B0B0;
+  --border-color: #434547;
 
-  --font-headings: 'Montserrat', sans-serif;
-  --font-body: 'Lato', sans-serif;
+  /* Tipografía */
+  --font-headings: 'Cormorant Garamond', serif;
+  --font-body: 'Montserrat', sans-serif;
 }
 
 body {
   font-family: var(--font-body);
   color: var(--text-primary);
+  background-color: var(--bg-base);
   margin: 0;
-  background-color: var(--bg-base); /* Usamos el nuevo fondo */
+  line-height: 1.6;
 }
 
-/* styles.css */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+a {
+  color: var(--primary-accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #8FF5A2;
+}
 
 /* Estilos para la animación de Fade-in on Scroll */
 .fade-in-section {
