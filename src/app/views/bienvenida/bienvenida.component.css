@@ -189,19 +189,42 @@ section {
 
 /* How it Works Section */
 .how-it-works-section {
+  position: relative;
   padding: 100px 20px;
-  background-color: #1c1e1f;
+  background-image: url('https://img.freepik.com/foto-gratis/zorro-rojo-noche_475641-1417.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
 }
 
 .how-it-works-section::before {
-  content: none;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(28, 30, 31, 0.92);
+}
+
+/* Posiciona el contenido por encima de la capa del fondo */
+.how-it-works-section > * {
+    position: relative;
 }
 
 .steps-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   align-items: stretch;
   gap: 30px;
+}
+
+.step:last-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 50%;
+  max-width: 555px;
 }
 
 .step {
