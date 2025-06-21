@@ -1,56 +1,94 @@
-.app-footer {
-  background: linear-gradient(90deg, #1976d2 60%, #43a047 100%);
-  padding: 32px 0 18px 0;
-  text-align: center;
-  border-top: none;
-  margin-top: auto;
-  color: #fff;
-  box-shadow: 0 -2px 16px rgba(25, 118, 210, 0.07);
+.footer-container {
+  background-color: var(--surface);
+  color: var(--text-secondary);
+  padding: 60px 40px;
+  border-top: 1px solid var(--border-color);
 }
 
 .footer-content {
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
+}
+
+.footer-main {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--border-color);
+  gap: 30px;
 }
 
-.footer-logo .logo {
-  font-size: 1.7rem;
-  font-weight: 900;
-  letter-spacing: -1px;
-  color: #fff;
+.logo-area .logo {
+  font-family: var(--font-headings);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
   text-decoration: none;
-  font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(90deg, #fff 60%, #b2ebf2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 10px;
 }
 
-.footer-slogan span {
-  font-size: 1.05rem;
-  color: #e3f2fd;
-  font-weight: 400;
-  letter-spacing: 0.5px;
+.tagline {
+  font-size: 1rem;
+  margin: 0;
+  max-width: 300px;
 }
 
-.footer-copy span {
-  font-size: 0.95rem;
-  color: #c8e6c9;
-  font-weight: 400;
+.social-links {
+  display: flex;
+  gap: 20px;
 }
 
-@media (max-width: 600px) {
-  .footer-content {
-    padding: 0 10px;
+.social-links a {
+  color: var(--text-secondary);
+  font-size: 1.5rem; /* Placeholder for icon size */
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--primary-accent);
+}
+
+/* Placeholder for icons */
+.icon-social::before {
+  content: '■'; /* Simple square placeholder */
+  font-family: sans-serif;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.footer-legal a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-left: 20px;
+  transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+  color: var(--primary-accent);
+}
+
+@media (max-width: 768px) {
+  .footer-main, .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
   }
-  .footer-logo .logo {
-    font-size: 1.2rem;
+
+  .footer-legal {
+    margin-top: 10px;
   }
-  .footer-slogan span, .footer-copy span {
-    font-size: 0.85rem;
+  
+  .footer-legal a {
+    margin: 0 10px;
   }
 }

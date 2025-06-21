@@ -1,10 +1,18 @@
 <header class="header" [ngClass]="{'scrolled': isScrolled}">
   <div class="header-container">
     <div class="logo">
-      <a routerLink="/">SmartXScan</a>
+      <a routerLink="/">Animal Wildlife</a>
     </div>
+    <nav class="navigation">
+      <ul>
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a></li>
+        <li><a routerLink="/prediccion" routerLinkActive="active">Analizar</a></li>
+        <li><a href="#" routerLinkActive="active">Galería</a></li>
+        <li><a href="#" routerLinkActive="active">Contacto</a></li>
+      </ul>
+    </nav>
     <div class="cta-header">
-      <a routerLink="/diagnostico" class="btn btn-primary">Realizar diagnóstico</a>
+      <a routerLink="/prediccion" class="btn btn-cta">Empezar a clasificar</a>
     </div>
   </div>
 </header>

@@ -1,160 +1,90 @@
-<div class="contenedor">
-  <!-- Header Section -->
-  <div class="header-section">
-    <h2 class="main-title">Análisis de Radiografía</h2>
-    <p class="subtitle">Suba una radiografía de tórax para detectar tuberculosis</p>
-  </div>
-  
-  <!-- Status Section -->
-  <div class="status-section">
-    <div class="backend-status" [class.connected]="backendStatus.includes('Conectado')">
-      <span class="status-icon">🔗</span>
-      <span class="status-text">{{ backendStatus }}</span>
-    </div>
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="page-title">Análisis de Imágenes</h1>
+    <p class="page-subtitle">Cargue una imagen de una cámara trampa para detectar y clasificar la fauna silvestre.</p>
   </div>
 
-  <!-- Upload Section -->
-  <div class="upload-section">
-    <div class="upload-area"
-         *ngIf="!selectedFile"
-         (click)="fileInput.click()"
-         (dragover)="$event.preventDefault()"
-         (drop)="onDrop($event)"
-         tabindex="0"
-         role="button"
-         aria-label="Subir imagen">
-      <div class="upload-icon">📷</div>
-      <h3>Seleccione o arrastre una imagen</h3>
-      <p>Formatos aceptados: JPEG, PNG</p>
-      <div class="file-upload">
-        <input #fileInput type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/jpeg, image/png" style="display:none;" />
-      </div>
-    </div>
+  <iframe src="https://3a6d4e4baacd7a48b4.gradio.live/" width="100%" height="500px"></iframe>
 
-    <!-- Preview Section -->
-    <div class="preview-section" *ngIf="selectedFile && isImage(selectedFile.type)">
-      <div class="preview-box">
-        <h4 class="preview-title">Vista Previa</h4>
-        <div class="image-container">
-          <img [src]="imagePreviewUrl" alt="Vista previa de la imagen" />
-        </div>
-        <p class="file-name">{{ selectedFile.name }}</p>
-      </div>
-    </div>
+  <div class="analysis-container">
+    <!-- Columna de Carga -->
+    <div class="upload-column">
+      <div class="upload-area" 
+           (click)="fileInput.click()"
+           (dragover)="onDragOver($event)"
+           (dragleave)="onDragLeave($event)"
+           (drop)="onDrop($event)"
+           [class.drag-over]="isDragOver">
+        
+        <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/jpeg, image/png" style="display: none;">
 
-    <!-- Error Message -->
-    <div class="error-message" *ngIf="errorMessage">
-      <span class="error-icon">⚠️</span>
-      <span>{{ errorMessage }}</span>
-    </div>
-
-    <!-- Analysis Button -->
-    <button class="btn-analizar" [disabled]="!selectedFile || isLoading" (click)="analizar()">
-      <span *ngIf="!isLoading" class="btn-text">
-        <span class="btn-icon">🔍</span>
-        Analizar imagen
-      </span>
-      <span *ngIf="isLoading" class="btn-loading">
-        <span class="spinner"></span>
-        Procesando...
-      </span>
-    </button>
-  </div>
-
-  <!-- Results Section -->
-  <div *ngIf="result" class="results-section">
-    <h3 class="results-title">Resultados del Análisis</h3>
-    
-    <!-- Non-radiograph result -->
-    <div *ngIf="!result.es_radiografia" class="result-card diagnosis-info">
-      <div class="card-header">
-        <span class="card-icon">📋</span>
-        <h4>Resultado</h4>
-      </div>
-      <div class="card-content">
-        <p>{{ result.detalle }}</p>
-        <div class="confidence-badge">
-          <span class="confidence-label">Confianza:</span>
-          <span class="confidence-value">{{ result.confianza }}%</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Radiograph results -->
-    <div *ngIf="result.es_radiografia" class="radiograph-results">
-      <!-- Clinical Diagnosis -->
-      <div class="result-card" [class]="getDiagnosisColor(result.diagnostico)">
-        <div class="card-header">
-          <span class="card-icon">🏥</span>
-          <h4>Diagnóstico Clínico</h4>
-        </div>
-        <div class="card-content">
-          <p class="diagnosis-text">{{ formatDiagnosis(result.diagnostico) }}</p>
-          <div class="metrics-row">
-            <div *ngIf="result.probabilidad_tb" class="metric-item">
-              <span class="metric-label">Probabilidad de TB:</span>
-              <span class="metric-value">{{ result.probabilidad_tb }}%</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-label">Confianza:</span>
-              <span class="metric-value">{{ result.confianza }}%</span>
-            </div>
+        <div *ngIf="!imagePreviewUrl" class="upload-instructions">
+          <div class="upload-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l-3 3m3-3l3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+            </svg>
           </div>
+          <h3>Arrastre y suelte una imagen aquí</h3>
+          <p>o haga clic para seleccionar un archivo</p>
+          <span class="file-types">JPG, PNG</span>
         </div>
-      </div>
-      
-      <!-- Technical Quality -->
-      <div class="result-card quality-card">
-        <div class="card-header">
-          <span class="card-icon">⚙️</span>
-          <h4>Calidad Técnica</h4>
-        </div>
-        <div class="card-content">
-          <div class="quality-grid">
-            <div class="quality-item">
-              <span class="quality-label">Diagnóstico Técnico:</span>
-              <span class="quality-value">{{ result.hallazgos_tecnicos.diagnostico_tecnico }}</span>
-            </div>
-            <div class="quality-item">
-              <span class="quality-label">Intensidad Media:</span>
-              <span class="quality-value">{{ result.hallazgos_tecnicos.intensidad_media | number:'1.1-1' }}</span>
-            </div>
-            <div class="quality-item">
-              <span class="quality-label">Contraste:</span>
-              <span class="quality-value">{{ result.hallazgos_tecnicos.contraste | number:'1.1-1' }}</span>
-            </div>
-            <div class="quality-item">
-              <span class="quality-label">Rango Dinámico:</span>
-              <div class="range-values">
-                <span>Oscuros: {{ result.hallazgos_tecnicos.rango_dinamico.oscuros | number:'1.1-1' }}</span>
-                <span>Claros: {{ result.hallazgos_tecnicos.rango_dinamico.claros | number:'1.1-1' }}</span>
-              </div>
-            </div>
-          </div>
-          
-          <div class="quality-details">
-            <div class="detail-item">
-              <span class="detail-label">Posible Causa:</span>
-              <span class="detail-value">{{ result.hallazgos_tecnicos.posible_causa }}</span>
-            </div>
-            <div class="detail-item">
-              <span class="detail-label">Consecuencia:</span>
-              <span class="detail-value">{{ result.hallazgos_tecnicos.consecuencia }}</span>
-            </div>
-          </div>
+
+        <div *ngIf="imagePreviewUrl" class="image-preview-container">
+          <img [src]="imagePreviewUrl" alt="Vista previa de la imagen cargada" class="image-preview">
         </div>
       </div>
 
-      <!-- Clinical Recommendation -->
-      <div *ngIf="result.recomendacion_clinica" class="result-card recommendation-card">
-        <div class="card-header">
-          <span class="card-icon">💡</span>
-          <h4>Recomendación Clínica</h4>
+      <button class="analyze-button" [disabled]="!selectedFile || isLoading" (click)="analizar()">
+        <span *ngIf="!isLoading">Clasificar Imagen</span>
+        <span *ngIf="isLoading" class="loading-spinner"></span>
+      </button>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
+
+    <!-- Columna de Resultados -->
+    <div class="results-column">
+      <div *ngIf="!result && !isLoading" class="results-placeholder">
+        <div class="placeholder-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+          </svg>
         </div>
-        <div class="card-content">
-          <p>{{ result.recomendacion_clinica }}</p>
+        <h3>Los resultados aparecerán aquí</h3>
+        <p>Cargue una imagen y haga clic en "Clasificar" para ver la predicción de la IA.</p>
+      </div>
+
+      <div *ngIf="isLoading" class="results-loading">
+        <div class="loading-spinner large"></div>
+        <h4>Analizando...</h4>
+        <p>Nuestro modelo está identificando la especie. Esto puede tardar unos segundos.</p>
+      </div>
+
+      <div *ngIf="result" class="results-content">
+        <h3 class="results-title">Resultados del Análisis</h3>
+        
+        <div class="top-prediction">
+          <h4>Principal Predicción</h4>
+          <p class="species-name">{{ result.predictions[0].species }}</p>
+          <div class="confidence-bar">
+            <div class="confidence-fill" [style.width.%]="result.predictions[0].confidence"></div>
+          </div>
+          <p class="confidence-label">{{ result.predictions[0].confidence | number:'1.1-1' }}% de confianza</p>
+        </div>
+
+        <div class="other-predictions" *ngIf="result.predictions.length > 1">
+          <h4>Otras Posibilidades</h4>
+          <ul>
+            <li *ngFor="let pred of result.predictions.slice(1)">
+              <span class="other-species">{{ pred.species }}</span>
+              <span class="other-confidence">{{ pred.confidence | number:'1.1-1' }}%</span>
+            </li>
+          </ul>
         </div>
       </div>
+
     </div>
   </div>
 </div>
