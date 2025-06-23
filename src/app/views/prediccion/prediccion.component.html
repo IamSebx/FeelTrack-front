@@ -1,95 +1,275 @@
-<div class="page-container">
-  <div class="page-header">
-    <h1 class="page-title">Análisis Interactivo</h1>
-    <p class="page-subtitle">Utilice la siguiente interfaz para interactuar directamente con nuestro modelo de IA.</p>
-  </div>
-
-  <div class="gradio-container">
-    <iframe src="https://a096b391f3a93e3123.gradio.live" width="100%" height="700px"></iframe>
-  </div>
-
-  <div class="info-section">
-    <h2 class="info-title">Especies que nuestro modelo puede detectar</h2>
-    <div class="species-list">
-      <span class="species-item">Águila</span>
-      <span class="species-item">Araña</span>
-      <span class="species-item">Ardilla</span>
-      <span class="species-item">Avestruz</span>
-      <span class="species-item">Ballena</span>
-      <span class="species-item">Búho</span>
-      <span class="species-item">Caballito de mar</span>
-      <span class="species-item">Cabra</span>
-      <span class="species-item">Caballo</span>
-      <span class="species-item">Calamar</span>
-      <span class="species-item">Camello</span>
-      <span class="species-item">Camarón</span>
-      <span class="species-item">Canario</span>
-      <span class="species-item">Cangrejo</span>
-      <span class="species-item">Canguro</span>
-      <span class="species-item">Caracol</span>
-      <span class="species-item">Cebra</span>
-      <span class="species-item">Cerdo</span>
-      <span class="species-item">Ciervo</span>
-      <span class="species-item">Ciempiés</span>
-      <span class="species-item">Cisne</span>
-      <span class="species-item">Cocodrilo</span>
-      <span class="species-item">Conejo</span>
-      <span class="species-item">Cuervo</span>
-      <span class="species-item">Elefante</span>
-      <span class="species-item">Erizo</span>
-      <span class="species-item">Escorpión</span>
-      <span class="species-item">Estrella de mar</span>
-      <span class="species-item">Foca común</span>
-      <span class="species-item">Ganado</span>
-      <span class="species-item">Garrapata</span>
-      <span class="species-item">Ganso</span>
-      <span class="species-item">Gorrión</span>
-      <span class="species-item">Guepardo</span>
-      <span class="species-item">Gusano</span>
-      <span class="species-item">Hámster</span>
-      <span class="species-item">Hipopótamo</span>
-      <span class="species-item">Jaguar</span>
-      <span class="species-item">Jirafa</span>
-      <span class="species-item">Koala</span>
-      <span class="species-item">Lagarto</span>
-      <span class="species-item">León</span>
-      <span class="species-item">León marino</span>
-      <span class="species-item">Leopardo</span>
-      <span class="species-item">Lince</span>
-      <span class="species-item">Mariquita</span>
-      <span class="species-item">Mapache</span>
-      <span class="species-item">Mariposa</span>
-      <span class="species-item">Medusa</span>
-      <span class="species-item">Mono</span>
-      <span class="species-item">Mula</span>
-      <span class="species-item">Nutria</span>
-      <span class="species-item">Oruga</span>
-      <span class="species-item">Oso</span>
-      <span class="species-item">Oso pardo</span>
-      <span class="species-item">Oso polar</span>
-      <span class="species-item">Panda</span>
-      <span class="species-item">Panda rojo</span>
-      <span class="species-item">Pato</span>
-      <span class="species-item">Pavo</span>
-      <span class="species-item">Pájaro carpintero</span>
-      <span class="species-item">Pez</span>
-      <span class="species-item">Pez dorado</span>
-      <span class="species-item">Pingüino</span>
-      <span class="species-item">Polillas y mariposas</span>
-      <span class="species-item">Pollo</span>
-      <span class="species-item">Rana</span>
-      <span class="species-item">Ratón</span>
-      <span class="species-item">Rinoceronte</span>
-      <span class="species-item">Serpiente</span>
-      <span class="species-item">Tiburón</span>
-      <span class="species-item">Tigre</span>
-      <span class="species-item">Tortuga</span>
-      <span class="species-item">Tortuga marina</span>
-      <span class="species-item">Tortuga terrestre</span>
-      <span class="species-item">Toro</span>
-      <span class="species-item">Urraca</span>
-      <span class="species-item">Zorro</span>
+<!-- Header Section -->
+<div class="analysis-header">
+  <div class="container">
+    <div class="header-content">
+      <div class="header-badge animate-fade-in-down">
+        <span class="badge-icon">🧠</span>
+        <span class="badge-text">Análisis Inteligente</span>
+      </div>
+      
+      <h1 class="header-title animate-fade-in-up">
+        Análisis de <span class="gradient-text">Emociones</span>
+      </h1>
+      
+      <p class="header-subtitle animate-fade-in-up">
+        Ingresa una reseña o comentario para analizar las emociones y polaridad del texto con tecnología de vanguardia en NLP.
+      </p>
     </div>
   </div>
+</div>
 
+<!-- Main Analysis Section -->
+<div class="analysis-main">
+  <div class="container">
+    <!-- Input Section -->
+    <div class="input-section card animate-fade-in-up" style="text-align: center;">
+      <div class="input-header">
+        <h2 class="input-title">
+          Reseña o Comentario
+        </h2>
+        <div class="model-warning">
+          <div class="model-emoji">🚧</div>
+          <div><strong>El modelo está por integrarse</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section" *ngIf="analysisResults">
+      <div class="results-header animate-fade-in-up">
+        <h2 class="results-title">
+          <span class="title-icon">📊</span>
+          Resultados del Análisis
+        </h2>
+        <p class="results-subtitle">Análisis completo con emociones, polaridad y palabras clave identificadas</p>
+      </div>
+      
+      <!-- Results Grid -->
+      <div class="results-grid">
+        <!-- Emotions Analysis -->
+        <div class="result-card card animate-fade-in-up">
+          <div class="card-header">
+            <div class="card-icon">
+              <span class="icon-emoji">😊</span>
+            </div>
+            <h3 class="card-title">Análisis de Emociones</h3>
+          </div>
+          
+          <div class="emotions-list">
+            <div class="emotion-item" *ngFor="let emotion of analysisResults.emotions; let i = index">
+              <div class="emotion-header">
+                <span class="emotion-name">{{emotion.name}}</span>
+                <span class="emotion-score">{{emotion.score}}%</span>
+              </div>
+              <div class="progress-container">
+                <div class="progress-bar">
+                  <div class="progress-fill" [style.width.%]="emotion.score" [style.animation-delay.ms]="i * 200"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Polarity Analysis -->
+        <div class="result-card card animate-fade-in-up">
+          <div class="card-header">
+            <div class="card-icon">
+              <span class="icon-emoji">📈</span>
+            </div>
+            <h3 class="card-title">Análisis de Polaridad</h3>
+          </div>
+          
+          <div class="polarity-display">
+            <div class="polarity-indicator" [class]="analysisResults.polarity.sentiment">
+              <div class="polarity-icon">
+                <span *ngIf="analysisResults.polarity.sentiment === 'positive'">😊</span>
+                <span *ngIf="analysisResults.polarity.sentiment === 'negative'">😞</span>
+                <span *ngIf="analysisResults.polarity.sentiment === 'neutral'">😐</span>
+              </div>
+              <div class="polarity-info">
+                <span class="polarity-label">{{analysisResults.polarity.sentiment | titlecase}}</span>
+                <span class="polarity-score">{{analysisResults.polarity.score}}%</span>
+              </div>
+            </div>
+            
+            <p class="polarity-description">{{getPolarityDescription()}}</p>
+            
+            <div class="polarity-bar">
+              <div class="polarity-fill" [class]="analysisResults.polarity.sentiment" [style.width.%]="analysisResults.polarity.score"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Keywords Section -->
+      <div class="keywords-section card animate-fade-in-up" *ngIf="analysisResults.keywords?.length">
+        <div class="section-header">
+          <h3 class="section-title">
+            <span class="title-icon">🔑</span>
+            Palabras Clave Identificadas
+          </h3>
+          <p class="section-subtitle">Términos importantes extraídos del texto</p>
+        </div>
+        
+        <div class="keywords-grid">
+          <div class="keyword-item" *ngFor="let keyword of analysisResults.keywords; let i = index">
+            <span class="keyword-text">{{keyword}}</span>
+            <span class="keyword-rank">#{{i + 1}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Confidence Section -->
+      <div class="confidence-section card animate-fade-in-up">
+        <div class="section-header">
+          <h3 class="section-title">
+            <span class="title-icon">🎯</span>
+            Nivel de Confianza
+          </h3>
+          <p class="section-subtitle">Precisión del análisis realizado</p>
+        </div>
+        
+        <div class="confidence-display">
+          <div class="confidence-circle">
+            <div class="circle-progress" [style.--progress]="analysisResults.confidence + '%'">
+              <div class="circle-inner">
+                <span class="confidence-number">{{analysisResults.confidence}}%</span>
+                <span class="confidence-label">Confianza</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="confidence-info">
+            <div class="confidence-item">
+              <span class="info-label">Calidad del texto:</span>
+              <span class="info-value">{{getTextQuality()}}</span>
+            </div>
+            <div class="confidence-item">
+              <span class="info-label">Longitud:</span>
+              <span class="info-value">{{reviewText.length}} caracteres</span>
+            </div>
+            <div class="confidence-item">
+              <span class="info-label">Palabras:</span>
+              <span class="info-value">{{reviewText.split(' ').length}} palabras</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Section -->
+    <div class="error-section animate-fade-in-up" *ngIf="errorMessage">
+      <div class="error-card card">
+        <div class="error-icon">
+          <span>⚠️</span>
+        </div>
+        <div class="error-content">
+          <h3 class="error-title">Error en el Análisis</h3>
+          <p class="error-message">{{errorMessage}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Examples Section -->
+<div class="examples-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-title">Ejemplos de Análisis</h2>
+      <p class="section-subtitle">Prueba con estos ejemplos para ver cómo funciona el sistema</p>
+    </div>
+    
+    <div class="examples-grid">
+      <div class="example-card card hover-lift animate-fade-in-up" (click)="loadExample('positive')">
+        <div class="example-header">
+          <div class="example-icon positive">😊</div>
+          <span class="example-tag positive">Positiva</span>
+        </div>
+        <h4 class="example-title">Reseña Positiva</h4>
+        <p class="example-text">"¡Excelente servicio! El producto superó todas mis expectativas. Definitivamente lo recomendaría a todos mis amigos."</p>
+        <div class="example-preview">
+          <span class="preview-label">Emociones esperadas:</span>
+          <div class="preview-emotions">
+            <span class="preview-emotion">Alegría</span>
+            <span class="preview-emotion">Satisfacción</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="example-card card hover-lift animate-fade-in-up" (click)="loadExample('negative')">
+        <div class="example-header">
+          <div class="example-icon negative">😞</div>
+          <span class="example-tag negative">Negativa</span>
+        </div>
+        <h4 class="example-title">Reseña Negativa</h4>
+        <p class="example-text">"Terrible experiencia. El producto llegó dañado y el servicio al cliente fue pésimo. No lo recomiendo para nada."</p>
+        <div class="example-preview">
+          <span class="preview-label">Emociones esperadas:</span>
+          <div class="preview-emotions">
+            <span class="preview-emotion">Enojo</span>
+            <span class="preview-emotion">Frustración</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="example-card card hover-lift animate-fade-in-up" (click)="loadExample('mixed')">
+        <div class="example-header">
+          <div class="example-icon mixed">😐</div>
+          <span class="example-tag mixed">Mixta</span>
+        </div>
+        <h4 class="example-title">Reseña Mixta</h4>
+        <p class="example-text">"El producto es bueno pero el envío tardó más de lo esperado. El precio está bien, pero la atención podría mejorar."</p>
+        <div class="example-preview">
+          <span class="preview-label">Emociones esperadas:</span>
+          <div class="preview-emotions">
+            <span class="preview-emotion">Neutral</span>
+            <span class="preview-emotion">Sorpresa</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Info Section -->
+<div class="info-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-title">¿Cómo Funciona?</h2>
+      <p class="section-subtitle">Tecnología avanzada de procesamiento de lenguaje natural</p>
+    </div>
+    
+    <div class="info-grid">
+      <div class="info-card card hover-lift animate-fade-in-up">
+        <div class="info-icon">
+          <span class="icon-emoji">🧠</span>
+        </div>
+        <h3 class="info-title">Procesamiento de Lenguaje Natural</h3>
+        <p class="info-description">
+          Utilizamos modelos de NLP avanzados para analizar el contexto, tono y palabras clave en el texto con alta precisión.
+        </p>
+      </div>
+      
+      <div class="info-card card hover-lift animate-fade-in-up">
+        <div class="info-icon">
+          <span class="icon-emoji">😊</span>
+        </div>
+        <h3 class="info-title">Clasificación de Emociones</h3>
+        <p class="info-description">
+          Nuestro sistema identifica emociones específicas basándose en patrones lingüísticos y expresiones emocionales.
+        </p>
+      </div>
+      
+      <div class="info-card card hover-lift animate-fade-in-up">
+        <div class="info-icon">
+          <span class="icon-emoji">📊</span>
+        </div>
+        <h3 class="info-title">Análisis de Polaridad</h3>
+        <p class="info-description">
+          Determinamos si el sentimiento general es positivo, negativo o neutral con un alto nivel de precisión.
+        </p>
+      </div>
+    </div>
+  </div>
 </div>

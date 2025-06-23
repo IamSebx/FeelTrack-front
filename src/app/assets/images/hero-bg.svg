@@ -1,0 +1,34 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="circleGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.1)" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0)" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Background gradient -->
+  <rect width="1200" height="800" fill="url(#heroGradient)"/>
+  
+  <!-- Floating circles -->
+  <circle cx="200" cy="150" r="60" fill="url(#circleGradient)" opacity="0.3"/>
+  <circle cx="1000" cy="200" r="40" fill="url(#circleGradient)" opacity="0.2"/>
+  <circle cx="150" cy="600" r="80" fill="url(#circleGradient)" opacity="0.25"/>
+  <circle cx="950" cy="650" r="50" fill="url(#circleGradient)" opacity="0.3"/>
+  <circle cx="400" cy="400" r="30" fill="url(#circleGradient)" opacity="0.15"/>
+  <circle cx="800" cy="350" r="70" fill="url(#circleGradient)" opacity="0.2"/>
+  
+  <!-- Geometric patterns -->
+  <polygon points="0,0 200,0 100,100" fill="rgba(255,255,255,0.05)"/>
+  <polygon points="1200,800 1000,800 1100,700" fill="rgba(255,255,255,0.05)"/>
+  <polygon points="1200,0 1000,0 1100,100" fill="rgba(255,255,255,0.03)"/>
+  <polygon points="0,800 200,800 100,700" fill="rgba(255,255,255,0.03)"/>
+  
+  <!-- Wave patterns -->
+  <path d="M0 400 Q300 350 600 400 T1200 400" stroke="rgba(255,255,255,0.1)" stroke-width="2" fill="none"/>
+  <path d="M0 500 Q300 450 600 500 T1200 500" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
+  <path d="M0 300 Q300 250 600 300 T1200 300" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
+</svg> 

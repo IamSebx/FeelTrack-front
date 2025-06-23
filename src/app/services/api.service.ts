@@ -4,6 +4,19 @@ import { Observable, throwError, of, TimeoutError } from 'rxjs';
 import { catchError, timeout, retry, switchMap } from 'rxjs/operators';
 import { environment } from '../environments/environment'; 
 
+export interface EmotionAnalysis {
+  emotions: Array<{
+    name: string;
+    score: number;
+  }>;
+  polarity: {
+    sentiment: 'positive' | 'negative' | 'neutral';
+    score: number;
+  };
+  keywords: string[];
+  confidence: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +33,55 @@ export class ApiService {
     });
   }
 
+  // Método para análisis de texto (nuevo)
+  analyzeText(text: string): Observable<EmotionAnalysis> {
+    const payload = { text };
+    
+    return this.http.post<EmotionAnalysis>(`${this.currentApiUrl}/analyze-text/`, payload).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.rotateApiUrl();
+        return this.handleApiError(error, () => this.http.post<EmotionAnalysis>(`${this.currentApiUrl}/analyze-text/`, payload));
+      })
+    );
+  }
+
+  // Método para análisis de emociones específico
+  analyzeEmotions(text: string): Observable<any> {
+    const payload = { text };
+    
+    return this.http.post(`${this.currentApiUrl}/analyze-emotions/`, payload).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.rotateApiUrl();
+        return this.handleApiError(error, () => this.http.post(`${this.currentApiUrl}/analyze-emotions/`, payload));
+      })
+    );
+  }
+
+  // Método para análisis de polaridad específico
+  analyzePolarity(text: string): Observable<any> {
+    const payload = { text };
+    
+    return this.http.post(`${this.currentApiUrl}/analyze-polarity/`, payload).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.rotateApiUrl();
+        return this.handleApiError(error, () => this.http.post(`${this.currentApiUrl}/analyze-polarity/`, payload));
+      })
+    );
+  }
+
+  // Método para extraer palabras clave
+  extractKeywords(text: string): Observable<any> {
+    const payload = { text };
+    
+    return this.http.post(`${this.currentApiUrl}/extract-keywords/`, payload).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.rotateApiUrl();
+        return this.handleApiError(error, () => this.http.post(`${this.currentApiUrl}/extract-keywords/`, payload));
+      })
+    );
+  }
+
+  // Método legacy para análisis de imágenes (mantenido por compatibilidad)
   analyzeImage(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
@@ -49,9 +111,9 @@ export class ApiService {
       this.rotateApiUrl();
       return throwError(() => this.getConnectionError());
     } else if (error.status === 400) {
-      return throwError(() => 'Formato de imagen no válido. Solo se aceptan JPEG, PNG o JPG');
+      return throwError(() => 'Texto no válido o demasiado corto para analizar');
     } else if (error.status === 500) {
-      return throwError(() => 'Error interno del servidor al procesar la imagen');
+      return throwError(() => 'Error interno del servidor al procesar el texto');
     }
     return throwError(() => `Error inesperado: ${error.message}`);
   }

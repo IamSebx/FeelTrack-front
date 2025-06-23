@@ -15,7 +15,7 @@ import { FadeInDirective } from './animations/fade-in.directive';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'SmartXScan';
+  title = 'FeelTrack';
   showSidebar: boolean = false;
 
   constructor(private router: Router) {

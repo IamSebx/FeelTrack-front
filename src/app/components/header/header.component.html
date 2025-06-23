@@ -1,11 +1,16 @@
 <header class="header" [ngClass]="{'scrolled': isScrolled}">
   <div class="header-container">
-    <div class="logo">
-      <a routerLink="/">Animal Wildlife</a>
+    <div class="logo-area">
+      <a routerLink="/" class="logo-link">
+        <span class="logo-icon">🧠</span>
+        <span class="logo-text">FeelTrack</span>
+      </a>
     </div>
-
     <div class="cta-header">
-      <a routerLink="/diagnostico" class="btn btn-cta">Empezar a clasificar</a>
+      <a routerLink="/analisis" class="btn btn-primary btn-cta">
+        <span class="btn-icon">🚀</span>
+        Comenzar análisis
+      </a>
     </div>
   </div>
 </header>

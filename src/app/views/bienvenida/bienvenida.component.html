@@ -1,109 +1,294 @@
-<section class="hero-container">
-  <div class="hero-content">
-    <h1 class="hero-title">Fauna Silvestre <br> bajo una nueva lente</h1>
-    <p class="hero-subtitle">
-      Un sistema de visión artificial para la detección y clasificación automática
-      de especies en cámaras trampa. Potenciando la investigación y conservación de la vida silvestre.
-    </p>
-    <a routerLink="/diagnostico" class="hero-button">Comenzar Análisis</a>
+<!-- Hero Section con diseño moderno -->
+<section class="hero-section">
+  <div class="hero-background">
+    <div class="hero-particles"></div>
+    <div class="hero-gradient"></div>
   </div>
-  <div class="hero-vignette"></div>
-</section>
-
-<section class="features-section">
+  
   <div class="container">
-    <div class="feature-card fade-in-section" appFadeIn>
-      <div class="feature-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-        </svg>
+    <div class="hero-content">
+      <div class="hero-badge animate-fade-in-down">
+        <span class="badge-icon">🧠</span>
+        <span class="badge-text">Análisis de Emociones con IA</span>
       </div>
-      <div class="feature-content">
-        <h3 class="feature-title">Detección Precisa</h3>
-        <p class="feature-description">
-          Utilizamos modelos de aprendizaje profundo para identificar animales con alta precisión,
-          incluso en imágenes con baja iluminación u ocultamiento parcial.
-        </p>
+      
+      <h1 class="hero-title animate-fade-in-up">
+        FeelTrack
+        <span class="gradient-text">Análisis de Emociones</span>
+      </h1>
+      
+      <p class="hero-subtitle animate-fade-in-up">
+        Descubre los sentimientos detrás de cada reseña con nuestro sistema inteligente de análisis de emociones y polaridad. 
+        Utilizamos NLP de última generación para transformar texto en insights emocionales valiosos.
+      </p>
+      
+      <div class="hero-actions animate-fade-in-up">
+        <a routerLink="/analisis" class="btn btn-primary btn-large">
+          <span class="btn-icon">🚀</span>
+          Comenzar Análisis
+        </a>
+        <a href="#features" class="btn btn-outline btn-large">
+          <span class="btn-icon">✨</span>
+          Ver Características
+        </a>
+      </div>
+      
+      <div class="hero-stats animate-fade-in-up">
+        <div class="stat-item">
+          <div class="stat-number">91%</div>
+          <div class="stat-label">Precisión</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">6+</div>
+          <div class="stat-label">Emociones</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2s</div>
+          <div class="stat-label">Análisis</div>
+        </div>
       </div>
     </div>
-    <div class="feature-card fade-in-section" appFadeIn>
-      <div class="feature-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
-        </svg>
+    
+    <div class="hero-visual">
+      <div class="floating-card card-emotion">
+        <div class="card-icon">😊</div>
+        <div class="card-text">Alegría</div>
+        <div class="card-score">85%</div>
       </div>
-      <div class="feature-content">
-        <h3 class="feature-title">Clasificación de Especies</h3>
-        <p class="feature-description">
-          Nuestro sistema no solo detecta la presencia de fauna, sino que también la clasifica
-          entre un amplio catálogo de especies.
-        </p>
+      <div class="floating-card card-polarity">
+        <div class="card-icon">📈</div>
+        <div class="card-text">Positiva</div>
+        <div class="card-score">92%</div>
       </div>
-    </div>
-    <div class="feature-card fade-in-section" appFadeIn>
-      <div class="feature-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
-        </svg>
-      </div>
-      <div class="feature-content">
-        <h3 class="feature-title">Análisis de Datos</h3>
-        <p class="feature-description">
-          Facilitamos la visualización de resultados para que los biólogos puedan
-          enfocarse en la interpretación de sus hallazgos.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="how-it-works-section" appFadeIn>
-  <div class="container-narrow">
-    <h2 class="section-title">Un Proceso Simplificado</h2>
-    <p class="section-subtitle">Desde la imagen hasta el dato científico en tres simples pasos.</p>
-    <div class="steps-container">
-      <div class="step">
-        <div class="step-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0l-3 3m3-3l3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
-          </svg>
-        </div>
-        <div class="step-text-content">
-            <h3 class="step-title">1. Cargar Imagen</h3>
-            <p class="step-description">Suba o arrastre una imagen capturada por una cámara trampa. Nuestro sistema es compatible con los formatos más comunes.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM18 13.5l.375 1.5L18 16.5l-.375-1.5-.375-1.5.375-1.5.375 1.5z" />
-          </svg>
-        </div>
-        <div class="step-text-content">
-            <h3 class="step-title">2. Análisis con IA</h3>
-            <p class="step-description">El modelo de aprendizaje profundo analiza la imagen para detectar y clasificar la especie.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-icon">
-           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
-          </svg>
-        </div>
-        <div class="step-text-content">
-            <h3 class="step-title">3. Obtener Resultados</h3>
-            <p class="step-description">Visualice la especie identificada y la confianza del análisis.</p>
-        </div>
+      <div class="floating-card card-confidence">
+        <div class="card-icon">🎯</div>
+        <div class="card-text">Confianza</div>
+        <div class="card-score">94%</div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Features Section -->
+<section id="features" class="features-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-title">Características Principales</h2>
+      <p class="section-subtitle">Potenciado por tecnología de vanguardia en procesamiento de lenguaje natural</p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card card hover-lift animate-fade-in-up">
+        <div class="feature-icon">
+          <div class="icon-bg bg-gradient-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+            </svg>
+          </div>
+        </div>
+        <h3 class="feature-title">Análisis de Emociones</h3>
+        <p class="feature-description">
+          Identificamos mas de 6 emociones principales con alta precisión como alegría, tristeza, enojo, sorpresa, miedo y neutral. 
+          Nuestro modelo de NLP analiza patrones lingüísticos y expresiones emocionales.
+        </p>
+        <div class="feature-tags">
+          <span class="tag">NLP</span>
+          <span class="tag">IA</span>
+          <span class="tag">Precisión</span>
+        </div>
+      </div>
+      
+      <div class="feature-card card hover-lift animate-fade-in-up">
+        <div class="feature-icon">
+          <div class="icon-bg bg-gradient-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+            </svg>
+          </div>
+        </div>
+        <h3 class="feature-title">Análisis de Polaridad</h3>
+        <p class="feature-description">
+          Determinamos si una reseña es positiva, negativa o neutral con un 90%+ de precisión. 
+          Proporcionamos puntuaciones detalladas y descripciones contextuales del sentimiento.
+        </p>
+        <div class="feature-tags">
+          <span class="tag">Sentimientos</span>
+          <span class="tag">Polaridad</span>
+          <span class="tag">Contexto</span>
+        </div>
+      </div>
+      
+      <div class="feature-card card hover-lift animate-fade-in-up">
+        <div class="feature-icon">
+          <div class="icon-bg bg-gradient-success">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+            </svg>
+          </div>
+        </div>
+        <h3 class="feature-title">Insights Detallados</h3>
+        <p class="feature-description">
+          Obtén análisis completos con porcentajes de confianza, palabras clave identificadas y tendencias emocionales. 
+          Toma decisiones informadas basadas en datos precisos.
+        </p>
+        <div class="feature-tags">
+          <span class="tag">Insights</span>
+          <span class="tag">Palabras Clave</span>
+          <span class="tag">Tendencias</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<section class="final-cta-section" appFadeIn>
-  <div class="container-narrow">
-    <h2>¿Listo para transformar su investigación?</h2>
-    <p>Empiece a analizar sus imágenes de cámaras trampa hoy mismo y acelere sus descubrimientos.</p>
-    <a routerLink="/diagnostico" class="hero-button">Comenzar Análisis Ahora</a>
+<!-- Process Section -->
+<section class="process-section">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-title">Proceso de Análisis</h2>
+      <p class="section-subtitle">Desde el texto hasta el análisis emocional en tres simples pasos</p>
+    </div>
+    
+    <div class="process-timeline">
+      <div class="process-step animate-slide-in-left">
+        <div class="step-number">01</div>
+        <div class="step-content">
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>
+          </div>
+          <h3 class="step-title">Ingresar Reseña</h3>
+          <p class="step-description">
+            Ingrese el CSV de los comentarios de los clientes. Nuestro sistema procesa texto en español con alta precisión.
+          </p>
+        </div>
+      </div>
+      
+      <div class="process-step animate-slide-in-right">
+        <div class="step-number">02</div>
+        <div class="step-content">
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM18 13.5l.375 1.5L18 16.5l-.375-1.5-.375-1.5.375-1.5.375 1.5z" />
+            </svg>
+          </div>
+          <h3 class="step-title">Procesamiento NLP</h3>
+          <p class="step-description">
+            Nuestros modelos de IA analizan el texto para identificar emociones y determinar la polaridad con alta precisión.
+          </p>
+        </div>
+      </div>
+      
+      <div class="process-step animate-slide-in-left">
+        <div class="step-number">03</div>
+        <div class="step-content">
+          <div class="step-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+            </svg>
+          </div>
+          <h3 class="step-title">Resultados Detallados</h3>
+          <p class="step-description">
+            Recibe un análisis completo con emociones identificadas, polaridad, palabras clave y nivel de confianza.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Emotions Showcase -->
+<section class="emotions-showcase">
+  <div class="container">
+    <div class="section-header text-center">
+      <h2 class="section-title">Emociones que Detectamos</h2>
+      <p class="section-subtitle">Nuestro sistema identifica las siguientes emociones principales con alta precisión</p>
+    </div>
+    
+    <div class="emotions-grid">
+      <div class="emotion-card card hover-scale animate-fade-in-up">
+        <div class="emotion-icon joy">😊</div>
+        <h3>Alegría</h3>
+        <p>Sentimientos positivos y de satisfacción</p>
+        <div class="emotion-stats">
+          <span class="stat">Precisión: 87%</span>
+          <span class="stat">Confianza: 92%</span>
+        </div>
+      </div>
+      
+      <div class="emotion-card card hover-scale animate-fade-in-up">
+        <div class="emotion-icon sadness">😢</div>
+        <h3>Tristeza</h3>
+        <p>Emociones de pena y desconsuelo</p>
+        <div class="emotion-stats">
+          <span class="stat">Precisión: 85%</span>
+          <span class="stat">Confianza: 89%</span>
+        </div>
+      </div>
+      
+      <div class="emotion-card card hover-scale animate-fade-in-up">
+        <div class="emotion-icon anger">😠</div>
+        <h3>Enojo</h3>
+        <p>Sentimientos de ira y frustración</p>
+        <div class="emotion-stats">
+          <span class="stat">Precisión: 88%</span>
+          <span class="stat">Confianza: 91%</span>
+        </div>
+      </div>
+      
+      <div class="emotion-card card hover-scale animate-fade-in-up">
+        <div class="emotion-icon surprise">😲</div>
+        <h3>Sorpresa</h3>
+        <p>Asombro y expectativa inesperada</p>
+        <div class="emotion-stats">
+          <span class="stat">Precisión: 83%</span>
+          <span class="stat">Confianza: 87%</span>
+        </div>
+      </div>
+      
+      <div class="emotion-card card hover-scale animate-fade-in-up">
+        <div class="emotion-icon fear">😨</div>
+        <h3>Miedo</h3>
+        <p>Preocupación y temor</p>
+        <div class="emotion-stats">
+          <span class="stat">Precisión: 86%</span>
+          <span class="stat">Confianza: 90%</span>
+        </div>
+      </div>
+      
+      <div class="emotion-card card hover-scale animate-fade-in-up">
+        <div class="emotion-icon neutral">😐</div>
+        <h3>Neutral</h3>
+        <p>Comentarios sin carga emocional</p>
+        <div class="emotion-stats">
+          <span class="stat">Precisión: 84%</span>
+          <span class="stat">Confianza: 88%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-content text-center">
+      <h2 class="cta-title">¿Listo para analizar emociones?</h2>
+      <p class="cta-subtitle">
+        Descubre los sentimientos detrás de las reseñas y obtén insights valiosos para tu negocio. 
+        Comienza a analizar ahora mismo.
+      </p>
+      <div class="cta-actions">
+        <a routerLink="/analisis" class="btn btn-primary btn-large">
+          <span class="btn-icon">🚀</span>
+          Comenzar Análisis Ahora
+        </a>
+        <div class="cta-badge">
+          <span class="badge-icon">⚡</span>
+          <span class="badge-text">Análisis en 2 segundos</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>

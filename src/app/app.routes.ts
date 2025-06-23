@@ -10,7 +10,7 @@ export const routes: Routes = [
         component: BienvenidaComponent,
     },
     {   
-        path: 'diagnostico',
+        path: 'analisis',
         component: PrediccionComponent,
     },
     {
