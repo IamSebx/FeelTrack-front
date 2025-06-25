@@ -22,14 +22,70 @@
 <div class="analysis-main">
   <div class="container">
     <!-- Input Section -->
-    <div class="input-section card animate-fade-in-up" style="text-align: center;">
+    <div class="input-section card animate-fade-in-up">
       <div class="input-header">
         <h2 class="input-title">
-          Reseña o Comentario
+          <span class="title-icon">📝</span>
+          Ingresa tu Texto
         </h2>
-        <div class="model-warning">
-          <div class="model-emoji">🚧</div>
-          <div><strong>El modelo está por integrarse</strong></div>
+        <p class="input-subtitle">Escribe una reseña, comentario o cualquier texto que quieras analizar</p>
+      </div>
+      
+      <div class="text-input-container">
+        <div class="textarea-wrapper">
+          <textarea 
+            [(ngModel)]="reviewText"
+            placeholder="Escribe aquí tu texto para analizar... Ejemplo: 'Estoy muy feliz con el servicio que recibí hoy. El personal fue muy amable y profesional.'"
+            class="text-input"
+            rows="6"
+            maxlength="1000"
+            [disabled]="isAnalyzing">
+          </textarea>
+          <div class="textarea-footer">
+            <span class="char-count">{{reviewText.length}} / 1000 caracteres</span>
+            <div class="input-actions">
+              <button 
+                type="button" 
+                class="btn btn-secondary btn-sm"
+                (click)="clearText()"
+                [disabled]="!reviewText.trim() || isAnalyzing">
+                <span class="btn-icon">🗑️</span>
+                Limpiar
+              </button>
+              <button 
+                type="button" 
+                class="btn btn-primary"
+                (click)="analyzeText()"
+                [disabled]="!reviewText.trim() || isAnalyzing">
+                <span class="btn-icon" *ngIf="!isAnalyzing">🔍</span>
+                <span class="btn-icon loading" *ngIf="isAnalyzing">⏳</span>
+                {{ isAnalyzing ? 'Analizando...' : 'Analizar Texto' }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Loading State -->
+      <div class="loading-section" *ngIf="isAnalyzing">
+        <div class="loading-content">
+          <div class="loading-spinner"></div>
+          <h3 class="loading-title">Analizando tu texto...</h3>
+          <p class="loading-subtitle">Nuestro modelo de IA está procesando las emociones y sentimientos</p>
+          <div class="loading-steps">
+            <div class="loading-step">
+              <span class="step-icon">📖</span>
+              <span class="step-text">Leyendo el texto</span>
+            </div>
+            <div class="loading-step">
+              <span class="step-icon">🧠</span>
+              <span class="step-text">Procesando con NLP</span>
+            </div>
+            <div class="loading-step">
+              <span class="step-icon">😊</span>
+              <span class="step-text">Identificando emociones</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

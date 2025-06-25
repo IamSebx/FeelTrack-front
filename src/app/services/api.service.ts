@@ -106,6 +106,18 @@ export class ApiService {
     );
   }
 
+  // Método para clasificar textos con el modelo de emociones
+  classifyTexts(texts: string[]): Observable<any> {
+    const payload = { texts };
+    
+    return this.http.post(`${this.currentApiUrl}/classify`, payload).pipe(
+      catchError((error: HttpErrorResponse) => {
+        this.rotateApiUrl();
+        return this.handleApiError(error, () => this.http.post(`${this.currentApiUrl}/classify`, payload));
+      })
+    );
+  }
+
   private handleApiError(error: HttpErrorResponse, retryFn: () => Observable<any>): Observable<any> {
     if (error.status === 0 || error instanceof TimeoutError) {
       this.rotateApiUrl();
