@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { ApiService } from '../../services/api.service';
 
 interface Emotion {
@@ -48,15 +49,24 @@ export class PrediccionComponent {
 
     try {
       // Llamar al backend real
-      const response = await this.apiService.classifyTexts([this.reviewText]).toPromise();
+      const response = await firstValueFrom(this.apiService.classifyTexts([this.reviewText]));
+      console.log('Respuesta del backend:', response);
+      
+      // La respuesta contiene un array de results, tomamos el primer resultado
       const result = response.results[0];
+      console.log('Resultado procesado:', result);
 
       // Adaptar la respuesta del backend al formato que espera el frontend
       this.analysisResults = {
-        emotions: result.translated_labels.map((label: string, i: number) => ({
-          name: label.charAt(0).toUpperCase() + label.slice(1),
-          score: Math.round((result.probabilities[result.predicted_labels[i]] || 0) * 100)
-        })),
+        emotions: result.translated_labels.map((label: string, i: number) => {
+          const predictedLabel = result.predicted_labels[i];
+          const probability = result.probabilities[predictedLabel] || 0;
+          console.log(`Mapeando emoción: ${label} -> ${predictedLabel} -> ${probability}`);
+          return {
+            name: label.charAt(0).toUpperCase() + label.slice(1),
+            score: Math.round(probability * 100)
+          };
+        }),
         polarity: {
           sentiment: this.getSentimentFromLabels(result.translated_labels),
           score: this.getPolarityScore(result.probabilities)
@@ -64,6 +74,8 @@ export class PrediccionComponent {
         keywords: this.extractKeywords(result.input),
         confidence: this.getConfidence(result.probabilities)
       };
+      
+      console.log('Resultados finales:', this.analysisResults);
     } catch (error) {
       this.errorMessage = 'Error al analizar el texto. Por favor, intenta de nuevo.';
       console.error('Error en análisis:', error);

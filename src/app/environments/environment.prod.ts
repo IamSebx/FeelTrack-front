@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
   apiUrls: [
-    'https://detector-tbc-api.strategyec.com',
-    'https://detector-tbc-api.strategyec.com'
+    'https://79fa-2800-200-f300-18e-d938-2d0a-f386-bee5.ngrok-free.app',
+    'hhttps://79fa-2800-200-f300-18e-d938-2d0a-f386-bee5.ngrok-free.app'
   ],
-  defaultApiUrl: 'https://detector-tbc-api.strategyec.com',
+  defaultApiUrl: 'https://79fa-2800-200-f300-18e-d938-2d0a-f386-bee5.ngrok-free.app',
   apiTimeout: 30000
 };

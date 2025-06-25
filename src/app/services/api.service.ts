@@ -109,9 +109,15 @@ export class ApiService {
   // Método para clasificar textos con el modelo de emociones
   classifyTexts(texts: string[]): Observable<any> {
     const payload = { texts };
+    console.log('Enviando al backend:', payload);
+    console.log('URL del backend:', `${this.currentApiUrl}/classify`);
     
     return this.http.post(`${this.currentApiUrl}/classify`, payload).pipe(
       catchError((error: HttpErrorResponse) => {
+        console.error('Error en classifyTexts:', error);
+        console.error('Status:', error.status);
+        console.error('StatusText:', error.statusText);
+        console.error('Error body:', error.error);
         this.rotateApiUrl();
         return this.handleApiError(error, () => this.http.post(`${this.currentApiUrl}/classify`, payload));
       })
