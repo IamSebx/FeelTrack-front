@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
   apiUrls: [
-    'https://79fa-2800-200-f300-18e-d938-2d0a-f386-bee5.ngrok-free.app',
-    'hhttps://79fa-2800-200-f300-18e-d938-2d0a-f386-bee5.ngrok-free.app'
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1:8000'
   ],
-  defaultApiUrl: 'https://79fa-2800-200-f300-18e-d938-2d0a-f386-bee5.ngrok-free.app',
+  defaultApiUrl: 'http://127.0.0.1:8000',
   apiTimeout: 30000
 };

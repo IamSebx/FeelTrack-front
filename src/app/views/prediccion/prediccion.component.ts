@@ -35,6 +35,20 @@ export class PrediccionComponent {
   isAnalyzing: boolean = false;
   errorMessage: string = '';
 
+  // Emociones que deben ser reemplazadas por "Neutral" (inglés y español)
+  private emotionsToReplace = [
+    'disgust', 'asco',
+    'surprise', 'sorpresa',
+    'desire', 'deseo',
+    'fear', 'miedo',
+    'embarrassment', 'vergüenza',
+    'remorse', 'remordimiento',
+    'nervousness', 'nerviosismo',
+    'pride', 'orgullo',
+    'relief', 'alivio',
+    'grief', 'duelo'
+  ];
+
   constructor(private apiService: ApiService) {}
 
   async analyzeText() {
@@ -56,17 +70,12 @@ export class PrediccionComponent {
       const result = response.results[0];
       console.log('Resultado procesado:', result);
 
+      // Procesar las emociones y aplicar la lógica de reemplazo
+      const processedEmotions = this.processEmotions(result.translated_labels, result.probabilities, result.predicted_labels);
+
       // Adaptar la respuesta del backend al formato que espera el frontend
       this.analysisResults = {
-        emotions: result.translated_labels.map((label: string, i: number) => {
-          const predictedLabel = result.predicted_labels[i];
-          const probability = result.probabilities[predictedLabel] || 0;
-          console.log(`Mapeando emoción: ${label} -> ${predictedLabel} -> ${probability}`);
-          return {
-            name: label.charAt(0).toUpperCase() + label.slice(1),
-            score: Math.round(probability * 100)
-          };
-        }),
+        emotions: processedEmotions,
         polarity: {
           sentiment: this.getSentimentFromLabels(result.translated_labels),
           score: this.getPolarityScore(result.probabilities)
@@ -82,6 +91,54 @@ export class PrediccionComponent {
     } finally {
       this.isAnalyzing = false;
     }
+  }
+
+  // Método para procesar las emociones y aplicar la lógica de reemplazo
+  private processEmotions(labels: string[], probabilities: {[key: string]: number}, predictedLabels?: string[]): Emotion[] {
+    const emotionsToReplace = new Set(this.emotionsToReplace.map(e => e.toLowerCase()));
+    const neutralEmotions: Emotion[] = [];
+    const regularEmotions: Emotion[] = [];
+    let neutralScoreSum = 0;
+    let neutralCount = 0;
+
+    labels.forEach((label: string, i: number) => {
+      const predictedLabel = label.toLowerCase();
+      // Usar el nombre original para buscar el score
+      let originalLabel = predictedLabels && predictedLabels[i] ? predictedLabels[i] : predictedLabel;
+      let probability = 0;
+      if (probabilities && typeof probabilities === 'object') {
+        probability = probabilities[originalLabel] !== undefined ? probabilities[originalLabel] : (probabilities[predictedLabel] || 0);
+      }
+      const score = Math.round(probability * 100);
+      
+      if (emotionsToReplace.has(predictedLabel)) {
+        // Acumular para el promedio de "Neutral"
+        neutralScoreSum += score;
+        neutralCount++;
+        console.log(`Emoción a reemplazar: ${label} (${score}%) -> Neutral`);
+      } else {
+        // Mantener como emoción regular
+        regularEmotions.push({
+          name: label.charAt(0).toUpperCase() + label.slice(1),
+          score: score
+        });
+        console.log(`Emoción regular: ${label} (${score}%)`);
+      }
+    });
+
+    // Agregar "Neutral" con el promedio si hay emociones reemplazadas
+    if (neutralCount > 0) {
+      const neutralAverageScore = Math.round(neutralScoreSum / neutralCount);
+      neutralEmotions.push({
+        name: 'Neutral',
+        score: neutralAverageScore
+      });
+      console.log(`Neutral agregado con promedio: ${neutralAverageScore}% (de ${neutralCount} emociones)`);
+    }
+
+    // Combinar y ordenar por score descendente
+    const allEmotions = [...regularEmotions, ...neutralEmotions];
+    return allEmotions.sort((a, b) => b.score - a.score);
   }
 
   // Métodos auxiliares para adaptar la respuesta del backend
