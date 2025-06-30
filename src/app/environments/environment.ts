@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
   apiUrls: [
-    'http://127.0.0.1:8000'
+    'https://feeltrack-backend.onrender.com'
   ],
-  defaultApiUrl: 'http://127.0.0.1:8000',
+  defaultApiUrl: 'https://feeltrack-backend.onrender.com',
   apiTimeout: 30000
 };
